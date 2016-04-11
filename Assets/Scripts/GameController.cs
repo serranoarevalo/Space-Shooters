@@ -11,8 +11,14 @@ public class GameController : MonoBehaviour {
 	public float startWait;
 	public float waveWait;
 
-	void Start(){
+	public GUIText scoreText;
+	private int score;
 
+	void Start()
+	{
+
+		score = 0;
+		UpdateScore ();
 		StartCoroutine (SpanWaves ());
 	
 	}
@@ -21,7 +27,8 @@ public class GameController : MonoBehaviour {
 	{
 		yield return new WaitForSeconds (startWait);
 
-		while (true) {
+		while (true) 
+		{
 		
 			for(int i = 0; i < hazardCount; i++){
 
@@ -35,6 +42,17 @@ public class GameController : MonoBehaviour {
 		
 		}
 
+	}
+
+	public void AddScore(int newScoreValue)
+	{
+		score += newScoreValue;
+		UpdateScore ();
+	}
+
+	void UpdateScore() 
+	{
+		scoreText.text = "Score: " + score;
 	}
 
 }
